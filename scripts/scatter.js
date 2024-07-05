@@ -5,9 +5,11 @@ var margin = {
     left: 40
 }
 
-async function load() {
+async function load(num_cylinders) {
 
-    let data = await d3.csv("../resources/cars2017.csv");
+    d3.select("#page_one").html("");
+
+    let raw_data = await d3.csv("../resources/cars2017.csv");
 
     //making graph responsive
     default_width = 700 - margin.left - margin.right;
@@ -36,12 +38,15 @@ async function load() {
     set_size();
     //end responsive graph code
 
+    let data = [];
 
     // format the data
-    data.forEach(function (d) {
-    console.log(d);
-        d.AverageHighwayMPG = +d.AverageHighwayMPG;
-        d.AverageCityMPG = +d.AverageCityMPG;
+    raw_data.forEach(function (d) {
+        if (num_cylinders == 'All' || d.EngineCylinders == num_cylinders) {
+            d.AverageHighwayMPG = +d.AverageHighwayMPG;
+            d.AverageCityMPG = +d.AverageCityMPG;
+            data.push(d);
+        }
     });
 
     // set the ranges
@@ -57,7 +62,7 @@ async function load() {
     })]);
 
     // append the svg object to the body of the page
-    var svg = d3.select("#scatter").append("svg")
+    var svg = d3.select("#page_one").append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
@@ -67,6 +72,7 @@ async function load() {
     // Add the data points
 
     var div = d3.select("body").append("div")
+         .attr('id', 'car_mouse_over')
          .attr("class", "tooltip")
          .style("opacity", 0);
 
@@ -121,5 +127,11 @@ async function load() {
 
 }
 
-load();
+function onChangeCylinder() {
+    var selectBox = document.getElementById("filter_cylinders");
+    var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+    load(selectedValue)
+}
+
+load('All');
 
