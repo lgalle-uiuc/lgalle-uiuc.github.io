@@ -1,35 +1,3 @@
-data = [{
-    date: 2009,
-    wage: 7.25
-}, {
-    date: 2008,
-    wage: 6.55
-}, {
-    date: 2007,
-    wage: 5.85
-}, {
-    date: 1997,
-    wage: 5.15
-}, {
-    date: 1996,
-    wage: 4.75
-}, {
-    date: 1991,
-    wage: 4.25
-}, {
-    date: 1981,
-    wage: 3.35
-}, {
-    date: 1980,
-    wage: 3.10
-}, {
-    date: 1979,
-    wage: 2.90
-}, {
-    date: 1978,
-    wage: 2.65
-}]
-
 var margin = {
     top: 20,
     right: 20,
@@ -37,18 +5,9 @@ var margin = {
     left: 40
 }
 
-function resolveAfter2Seconds(whoa) {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(whoa);
-    }, 2000);
-  });
-}
-
 async function load() {
 
-    let cars_data = await d3.csv("../resources/cars2017.csv");
-    console.log(JSON.stringify(cars_data));
+    let data = await d3.csv("../resources/cars2017.csv");
 
     //making graph responsive
     default_width = 700 - margin.left - margin.right;
@@ -80,25 +39,21 @@ async function load() {
 
     // format the data
     data.forEach(function (d) {
-        parseDate = d3.timeParse("%Y");
-        d.date = parseDate(d.date);
-        d.wage = +d.wage;
-    });
-    //sort the data by date so the trend line makes sense
-    data.sort(function (a, b) {
-        return a.date - b.date;
+    console.log(d);
+        d.AverageHighwayMPG = +d.AverageHighwayMPG;
+        d.AverageCityMPG = +d.AverageCityMPG;
     });
 
     // set the ranges
-    var x = d3.scaleTime().range([0, width]);
+    var x = d3.scaleLinear().range([0, width]);
     var y = d3.scaleLinear().range([height, 0]);
 
     // Scale the range of the data
     x.domain(d3.extent(data, function (d) {
-        return d.date;
+        return d.AverageHighwayMPG;
     }));
     y.domain([0, d3.max(data, function (d) {
-        return d.wage;
+        return d.AverageCityMPG;
     })]);
 
     // append the svg object to the body of the page
@@ -120,10 +75,10 @@ async function load() {
         .enter().append("circle")
         .attr("r", 5)
         .attr("cx", function (d) {
-            return x(d.date);
+            return x(d.AverageHighwayMPG);
         })
         .attr("cy", function (d) {
-            return y(d.wage);
+            return y(d.AverageCityMPG);
         })
         .attr("stroke", "#32CD32")
         .attr("stroke-width", 1.5)
@@ -135,7 +90,7 @@ async function load() {
             div.transition()
                 .duration(100)
                 .style("opacity", 1);
-            div.html("$" + d3.format(".2f")(d.wage))
+            div.html(d.Make)
                 .style("left", (d3.event.pageX + 10) + "px")
                 .style("top", (d3.event.pageY - 15) + "px");
         })
@@ -161,7 +116,7 @@ async function load() {
 
     svg.append("g")
         .call(d3.axisLeft(y).tickFormat(function (d) {
-            return "$" + d3.format(".2f")(d)
+            return d
         }));
 
 }
