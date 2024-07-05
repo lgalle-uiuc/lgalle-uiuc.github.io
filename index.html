@@ -7,24 +7,33 @@
 <body>
 <!-- Load d3.js -->
 <script src="https://d3js.org/d3.v5.js"></script>
+<div style="text-align: center;">
 
-<button id="previous" type="button" onclick="onPressPrevious();" disabled="disabled" >Previous</button>
-<button id="next" type="button" onclick="onPressNext();">Next</button>
-<br>
-<div>
-Filter By Number of Cylinders
-<select name="Filter Cylinders" id="filter_cylinders" onchange="onChangeCylinder();">
-    <option value="0">0</option>
-    <option value="4">4</option>
-    <option value="8">8</option>
-    <option value="12">12</option>
-    <option value="All">All</option>
-</select>
+    <h1>Comparison of Fuel Economy Amongst Different Fuel Types</h1>
+    <br>
+    <br>
+    <div style="width: 100%; overflow: hidden;">
+        <div style="width: 300px; float: left; margin-left:200px">
+            <button id="previous" type="button" onclick="onPressPrevious();" disabled="disabled">Previous</button>
+            <button id="next" type="button" onclick="onPressNext();">Next</button>
+            <br>
+            <br>
+            <div>
+                Filter By Number of Cylinders
+                <select name="Filter Cylinders" id="filter_cylinders" onchange="onChangeCylinder();">
+                    <option value="0">0</option>
+                    <option value="4">4</option>
+                    <option value="8">8</option>
+                    <option value="12">12</option>
+                    <option value="All">All</option>
+                </select>
+            </div>
+        </div>
+        <div id="page_chart"></div>
+
+    </div>
 </div>
 
-<div id="page_one"></div>
-<div id="page_two"></div>
-<div id="page_three"></div>
 
 <script src="scripts/scatter.js" async></script>
 

@@ -15,7 +15,7 @@ async function load(num_cylinders, screen) {
     console.log(num_cylinders)
     console.log(screen)
 
-    d3.select("#page_one").html("");
+    d3.select("#page_chart").html("");
 
     let raw_data = await d3.csv("../resources/cars2017.csv");
 
@@ -69,7 +69,7 @@ async function load(num_cylinders, screen) {
     })]);
 
     // append the svg object to the body of the page
-    var svg = d3.select("#page_one").append("svg")
+    var svg = d3.select("#page_chart").append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
