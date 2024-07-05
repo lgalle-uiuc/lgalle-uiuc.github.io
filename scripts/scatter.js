@@ -1,11 +1,19 @@
+//https://medium.com/@kj_schmidt/making-a-simple-scatter-plot-with-d3js-58cc894d7c97
+//https://medium.com/@kj_schmidt/hover-effects-for-your-scatter-plot-447df80ea116
+
+var screen_index = 0;
+var screens = ['Gasoline', 'Diesel' , 'Electricity'];
+
 var margin = {
     top: 20,
     right: 20,
     bottom: 30,
     left: 40
 }
+async function load(num_cylinders, screen) {
 
-async function load(num_cylinders) {
+    console.log(num_cylinders)
+    console.log(screen)
 
     d3.select("#page_one").html("");
 
@@ -36,13 +44,12 @@ async function load(num_cylinders) {
         height = h - margin.top - margin.bottom;
     };
     set_size();
-    //end responsive graph code
 
     let data = [];
 
     // format the data
     raw_data.forEach(function (d) {
-        if (num_cylinders == 'All' || d.EngineCylinders == num_cylinders) {
+        if ((num_cylinders == 'All' || d.EngineCylinders == num_cylinders) && d.Fuel == screen) {
             d.AverageHighwayMPG = +d.AverageHighwayMPG;
             d.AverageCityMPG = +d.AverageCityMPG;
             data.push(d);
@@ -130,8 +137,36 @@ async function load(num_cylinders) {
 function onChangeCylinder() {
     var selectBox = document.getElementById("filter_cylinders");
     var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-    load(selectedValue)
+    load(selectedValue, screens[screen_index])
 }
 
-load('All');
+function onPressNext() {
+    if (!isNextDisabled()) {
+        screen_index = (screen_index + 1) % 3;
+        load('All', screens[screen_index]);
+    }
+
+    d3.select("#next").attr("disabled", isNextDisabled() ? "true" : null);
+    d3.select("#previous").attr("disabled", null);
+}
+
+function onPressPrevious() {
+    if (!isPreviousDisabled()) {
+        screen_index = (screen_index - 1) % 3;
+        load('All', screens[screen_index]);
+    }
+
+    d3.select("#previous").attr("disabled", isPreviousDisabled() ? "true" : null);
+    d3.select("#next").attr("disabled", null);
+}
+
+function isNextDisabled() {
+    return screen_index == 2;
+}
+
+function isPreviousDisabled() {
+    return screen_index == 0;
+}
+
+load('All', 'Gasoline');
 

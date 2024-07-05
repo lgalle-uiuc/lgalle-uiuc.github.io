@@ -8,11 +8,11 @@
 <!-- Load d3.js -->
 <script src="https://d3js.org/d3.v5.js"></script>
 
-<button id="previous" type="button">Previous</button>
-<button id="next" type="button">Next</button>
+<button id="previous" type="button" onclick="onPressPrevious();" disabled="disabled" >Previous</button>
+<button id="next" type="button" onclick="onPressNext();">Next</button>
 <br>
+<div>
 Filter By Number of Cylinders
-<br>
 <select name="Filter Cylinders" id="filter_cylinders" onchange="onChangeCylinder();">
     <option value="0">0</option>
     <option value="4">4</option>
@@ -20,6 +20,7 @@ Filter By Number of Cylinders
     <option value="12">12</option>
     <option value="All">All</option>
 </select>
+</div>
 
 <div id="page_one"></div>
 <div id="page_two"></div>
