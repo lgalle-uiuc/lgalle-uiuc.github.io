@@ -4,8 +4,6 @@
     <link rel="stylesheet" href="styles/styles.css">
 </head>
 
-<style> .third { width: 33.33%; float: left; } </style>
-
 <body>
 <!-- Load d3.js -->
 <script src="https://d3js.org/d3.v5.js"></script>
@@ -14,7 +12,9 @@
     <h1>Comparison of Fuel Economy Amongst Different Fuel Types</h1>
     <br>
     <br>
+    <div id="menu">
 
+    </div>
     <div class="quarter">
         <p>Click the "Previous" and "Next" buttons to see how fuel types affect the fuel economy of 2017 vehicles</p>
         <button id="previous" type="button" onclick="onPressPrevious();" disabled="disabled">Previous</button>
@@ -25,11 +25,11 @@
             <div>
                 You can also filter by the number of engine cylinders:
                 <select name="Filter Cylinders" id="filter_cylinders" onchange="onChangeCylinder();">
+                    <option value="All">All</option>
                     <option value="0">0</option>
                     <option value="4">4</option>
                     <option value="8">8</option>
                     <option value="12">12</option>
-                    <option value="All">All</option>
                 </select>
             </div>
             <br>
@@ -61,6 +61,7 @@
 
 <script src="scripts/charts/aggregate-chart.js" async></script>
 <script src="scripts/charts/dyanmic-chart.js" async></script>
+<script src="scripts/controller.js" async></script>
 
 </body>
 </html>

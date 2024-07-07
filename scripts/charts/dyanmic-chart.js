@@ -1,16 +1,13 @@
 //https://medium.com/@kj_schmidt/making-a-simple-scatter-plot-with-d3js-58cc894d7c97
 //https://medium.com/@kj_schmidt/hover-effects-for-your-scatter-plot-447df80ea116
 
-var screen_index = 0;
-var screens = ['Gasoline', 'Diesel' , 'Electricity'];
-
 var margin = {
     top: 20,
     right: 20,
     bottom: 30,
     left: 40
 }
-async function load(num_cylinders, screen) {
+async function loadDynamic(num_cylinders, screen) {
 
     console.log(num_cylinders)
     console.log(screen)
@@ -20,7 +17,7 @@ async function load(num_cylinders, screen) {
     let raw_data = await d3.csv("../resources/cars2017.csv");
 
     //making graph responsive
-    default_width = 700 - margin.left - margin.right;
+    default_width = 500 - margin.left - margin.right;
     default_height = 500 - margin.top - margin.bottom;
     default_ratio = default_width / default_height;
 
@@ -94,11 +91,11 @@ async function load(num_cylinders, screen) {
             return y(d.AverageCityMPG);
         })
         .attr("stroke", function (d, i) {
-            let color = '#99ff66';
+            let color = '';
             console.log(d.Fuel);
             switch (d.Fuel) {
                 case "Gasoline":
-                    color = "#99ff66";
+                    color = "#669900";
                     break;
                 case "Diesel":
                     color = "#ff0000";
@@ -154,13 +151,13 @@ async function load(num_cylinders, screen) {
 function onChangeCylinder() {
     var selectBox = document.getElementById("filter_cylinders");
     var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-    load(selectedValue, screens[screen_index])
+    loadDynamic(selectedValue, screens[screen_index])
 }
 
 function onPressNext() {
     if (!isNextDisabled()) {
         screen_index = (screen_index + 1) % 3;
-        load('All', screens[screen_index]);
+        loadDynamic('All', screens[screen_index]);
     }
 
     d3.select("#next").attr("disabled", isNextDisabled() ? "true" : null);
@@ -170,7 +167,7 @@ function onPressNext() {
 function onPressPrevious() {
     if (!isPreviousDisabled()) {
         screen_index = (screen_index - 1) % 3;
-        load('All', screens[screen_index]);
+        loadDynamic('All', screens[screen_index]);
     }
 
     d3.select("#previous").attr("disabled", isPreviousDisabled() ? "true" : null);
@@ -185,5 +182,5 @@ function isPreviousDisabled() {
     return screen_index == 0;
 }
 
-load('All', 'Gasoline');
+loadDynamic('All', 'Gasoline');
 
