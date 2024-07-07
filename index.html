@@ -16,19 +16,33 @@
     <br>
 
     <div class="quarter">
+        <p>Click the "Previous" and "Next" buttons to see how fuel types affect the fuel economy of 2017 vehicles</p>
         <button id="previous" type="button" onclick="onPressPrevious();" disabled="disabled">Previous</button>
         <button id="next" type="button" onclick="onPressNext();">Next</button>
         <br>
         <br>
         <div>
-            Filter By Number of Cylinders
-            <select name="Filter Cylinders" id="filter_cylinders" onchange="onChangeCylinder();">
-                <option value="0">0</option>
-                <option value="4">4</option>
-                <option value="8">8</option>
-                <option value="12">12</option>
-                <option value="All">All</option>
-            </select>
+            <div>
+                You can also filter by the number of engine cylinders:
+                <select name="Filter Cylinders" id="filter_cylinders" onchange="onChangeCylinder();">
+                    <option value="0">0</option>
+                    <option value="4">4</option>
+                    <option value="8">8</option>
+                    <option value="12">12</option>
+                    <option value="All">All</option>
+                </select>
+            </div>
+            <br>
+            <div>
+                Or by the vehicle make:
+                <select>
+                    <option value="0">0</option>
+                    <option value="4">4</option>
+                    <option value="8">8</option>
+                    <option value="12">12</option>
+                    <option value="All">All</option>
+                </select>
+            </div>
         </div>
     </div>
 
