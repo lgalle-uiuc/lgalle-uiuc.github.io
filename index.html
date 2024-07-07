@@ -4,6 +4,8 @@
     <link rel="stylesheet" href="styles/styles.css">
 </head>
 
+<style> .third { width: 33.33%; float: left; } </style>
+
 <body>
 <!-- Load d3.js -->
 <script src="https://d3js.org/d3.v5.js"></script>
@@ -12,34 +14,33 @@
     <h1>Comparison of Fuel Economy Amongst Different Fuel Types</h1>
     <br>
     <br>
-    <div style="width: 100%; overflow: hidden;">
-        <div style="width: 300px; float: left; margin-left:200px">
-            <button id="previous" type="button" onclick="onPressPrevious();" disabled="disabled">Previous</button>
-            <button id="next" type="button" onclick="onPressNext();">Next</button>
-            <br>
-            <br>
-            <div>
-                Filter By Number of Cylinders
-                <select name="Filter Cylinders" id="filter_cylinders" onchange="onChangeCylinder();">
-                    <option value="0">0</option>
-                    <option value="4">4</option>
-                    <option value="8">8</option>
-                    <option value="12">12</option>
-                    <option value="All">All</option>
-                </select>
-            </div>
+
+    <div class="quarter">
+        <button id="previous" type="button" onclick="onPressPrevious();" disabled="disabled">Previous</button>
+        <button id="next" type="button" onclick="onPressNext();">Next</button>
+        <br>
+        <br>
+        <div>
+            Filter By Number of Cylinders
+            <select name="Filter Cylinders" id="filter_cylinders" onchange="onChangeCylinder();">
+                <option value="0">0</option>
+                <option value="4">4</option>
+                <option value="8">8</option>
+                <option value="12">12</option>
+                <option value="All">All</option>
+            </select>
         </div>
-
-        <div id="overall_data"></div>
-
-        <div id="page_data"></div>
-
-
     </div>
+
+    <div class="third" id="dynamic_chart"></div>
+
+    <div class="third" id="aggregate_chart"></div>
+
 </div>
 
 
-<script src="scripts/page_data.js" async></script>
+<script src="scripts/charts/aggregate-chart.js" async></script>
+<script src="scripts/charts/dyanmic-chart.js" async></script>
 
 </body>
 </html>

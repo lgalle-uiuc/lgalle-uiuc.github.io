@@ -9,3 +9,7 @@ div.tooltip {
     pointer-events: none;
     font-size: .7rem;
 }
+
+.third { width: 33.33%; float: left; }
+
+.quarter { width: 25%; float: left; }
