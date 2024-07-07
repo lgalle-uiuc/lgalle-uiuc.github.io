@@ -88,7 +88,22 @@ async function load(num_cylinders, screen) {
         .attr("cy", function (d) {
             return y(d.AverageCityMPG);
         })
-        .attr("stroke", "#32CD32")
+        .attr("stroke", function (d, i) {
+            let color = '#99ff66';
+            console.log(d.Fuel);
+            switch (d.Fuel) {
+                case "Gasoline":
+                    color = "#99ff66";
+                    break;
+                case "Diesel":
+                    color = "#ff0000";
+                    break;
+                case "Electricity":
+                    color = "#3366ff";
+                    break;
+            }
+            return color;
+        })
         .attr("stroke-width", 1.5)
         .attr("fill", "#FFFFFF")
         .on('mouseover', function (d, i) {
@@ -99,7 +114,8 @@ async function load(num_cylinders, screen) {
                 .duration(100)
                 .style("opacity", 1);
             div.html('<div><p>Make: ' + d.Make + '</p><p>AverageHighwayMPG: ' + d.AverageHighwayMPG
-                    + '</p><p>AverageCityMPG: ' + d.AverageCityMPG + '</p><p>Cylinders: ' + d.EngineCylinders + '</p></div>')
+                    + '</p><p>AverageCityMPG: ' + d.AverageCityMPG + '</p><p>Cylinders: ' + d.EngineCylinders
+                    + '</p><p>Fuel: ' + d.Fuel + '</p></div>')
                 .style("left", (d3.event.pageX + 10) + "px")
                 .style("top", (d3.event.pageY - 15) + "px");
         })
