@@ -2,11 +2,65 @@
 
 <head>
     <link rel="stylesheet" href="styles/styles.css">
+
+    <style>
+    :root {
+        --annotation-color: #E8336D;
+    }
+
+     body{
+        background-color: whitesmoke;
+     }
+
+     svg {
+        background-color: white;
+     }
+
+     line {
+       stroke:#eae4e4;
+     }
+
+      .annotation path {
+        stroke: var(--annotation-color);
+        fill: rgba(0,0,0,0);
+      }
+
+      .annotation path.connector-arrow{
+        fill: var(--annotation-color);
+      }
+
+      .annotation text {
+        fill: var(--annotation-color);
+      }
+
+      .annotation-title {
+        font-weight: bold;
+      }
+
+       circle.handle {
+        stroke-dasharray: 5;
+        stroke: var(--annotation-color);
+        fill: rgba(255, 255, 255, .5);
+        cursor: move;
+
+        stroke-opacity: .4;
+      }
+
+      circle.handle.highlight {
+        stroke-opacity: 1;
+      }
+
+       .annotation-note-bg {
+          fill: rgba(255, 255, 255, 0);
+        }
+
+    </style>
 </head>
 
 <body>
 <!-- Load d3.js -->
 <script src="https://d3js.org/d3.v5.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-annotation/2.5.1/d3-annotation.min.js" integrity="sha512-iBAeBWWWFb8HqSBcrqcz98iIpuVH1la39dEYHtyQ/pGpeCQTQVvLJOWAuhv2Q7JSHp9k7hWA7sGxU3hHJe+tFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <div style="text-align: center;">
 
     <h1>Comparison of Fuel Economy Amongst Different Fuel Types</h1>
@@ -19,11 +73,23 @@
         <p>Click the "Previous" and "Next" buttons to see how fuel types affect the fuel economy of 2017 vehicles</p>
         <button id="previous" type="button" onclick="onPressPrevious();" disabled="disabled">Previous</button>
         <button id="next" type="button" onclick="onPressNext();">Next</button>
+    </div>
+
+    <div class="third">
+        <h3 id="dynamic_title">2017 Cars With Gasoline Fuel</h3>
+        <div id="dynamic_chart"></div>
+    </div>
+
+    <div class="third">
+        <h3>All 2017 Cars</h3>
+        <div id="aggregate_chart"></div>
+    </div>
+
+    <div class="filter">
         <br>
         <br>
-        <div>
             <div>
-                You can also filter by the number of engine cylinders:
+                Filter By Cylinders:
                 <select name="Filter Cylinders" id="filter_cylinders" onchange="onChangeCylinder();">
                     <option value="All">All</option>
                     <option value="0">0</option>
@@ -34,7 +100,7 @@
             </div>
             <br>
             <div>
-                Or by the vehicle make:
+                Filter By Vehicle:
                 <select>
                     <option value="0">0</option>
                     <option value="4">4</option>
@@ -43,17 +109,6 @@
                     <option value="All">All</option>
                 </select>
             </div>
-        </div>
-    </div>
-
-    <div class="third">
-        <h3>Dynamic 2017 Cars</h3>
-        <div id="dynamic_chart"></div>
-    </div>
-
-    <div class="third">
-        <h3>All 2017 Cars</h3>
-        <div id="aggregate_chart"></div>
     </div>
 
 </div>

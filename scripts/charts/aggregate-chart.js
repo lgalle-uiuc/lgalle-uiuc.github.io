@@ -103,25 +103,30 @@ async function loadAggregate(num_cylinders, screen) {
         .attr("stroke-width", 1.5)
         .attr("fill", "#FFFFFF")
         .on('mouseover', function (d, i) {
-            d3.select(this).transition()
-                .duration('100')
-                .attr("r", 7);
-            div.transition()
-                .duration(100)
-                .style("opacity", 1);
-            div.html('<div><p>Make: ' + d.Make + '</p><p>Average Highway MPG: ' + d.AverageHighwayMPG
-                    + '</p><p>Average City MPG: ' + d.AverageCityMPG + '</p><p>Cylinders: ' + d.EngineCylinders
-                    + '</p><p>Fuel: ' + d.Fuel + '</p></div>')
-                .style("left", (d3.event.pageX + 10) + "px")
-                .style("top", (d3.event.pageY - 15) + "px");
+            if (isLoadable(d, screen, num_cylinders)) {
+                d3.select(this).transition()
+                    .duration('100')
+                    .attr("r", 7);
+                div.transition()
+                    .duration(100)
+                    .style("opacity", 1);
+                div.html('<div><p>Make: ' + d.Make + '</p><p>Average Highway MPG: ' + d.AverageHighwayMPG
+                        + '</p><p>Average City MPG: ' + d.AverageCityMPG + '</p><p>Cylinders: ' + d.EngineCylinders
+                        + '</p><p>Fuel: ' + d.Fuel + '</p></div>')
+                    .style("left", (d3.event.pageX + 10) + "px")
+                    .style("top", (d3.event.pageY - 15) + "px");
+            }
         })
         .on('mouseout', function (d, i) {
+            if (isLoadable(d, screen, num_cylinders)) {
             d3.select(this).transition()
                 .duration('200')
                 .attr("r", 5);
             div.transition()
                 .duration('200')
                 .style("opacity", 0);
+        }
+
         });
 
     // Add the axis

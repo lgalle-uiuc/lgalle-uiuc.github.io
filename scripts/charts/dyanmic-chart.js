@@ -9,9 +9,6 @@ var margin = {
 }
 async function loadDynamic(num_cylinders, screen) {
 
-    console.log(num_cylinders)
-    console.log(screen)
-
     d3.select("#dynamic_chart").html("");
 
     let raw_data = await d3.csv("../resources/cars2017.csv");
@@ -92,7 +89,6 @@ async function loadDynamic(num_cylinders, screen) {
         })
         .attr("stroke", function (d, i) {
             let color = '';
-            console.log(d.Fuel);
             switch (d.Fuel) {
                 case "Gasoline":
                     color = "#669900";
