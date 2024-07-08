@@ -48,6 +48,13 @@ async function loadAggregate(num_cylinders, screen) {
         data.push(d);
     });
 
+    // so top elements are displayed
+    data = data.sort((a, b) => {
+        if (b.Fuel == screen) {
+            return -1;
+        }
+    })
+
     // set the ranges
     var x = d3.scaleLinear().range([0, width]);
     var y = d3.scaleLinear().range([height, 0]);
@@ -101,33 +108,7 @@ async function loadAggregate(num_cylinders, screen) {
             return color;
         })
         .attr("stroke-width", 1.5)
-        .attr("fill", "#FFFFFF")
-        .on('mouseover', function (d, i) {
-            if (isLoadable(d, screen, num_cylinders)) {
-                d3.select(this).transition()
-                    .duration('100')
-                    .attr("r", 7);
-                div.transition()
-                    .duration(100)
-                    .style("opacity", 1);
-                div.html('<div><p>Make: ' + d.Make + '</p><p>Average Highway MPG: ' + d.AverageHighwayMPG
-                        + '</p><p>Average City MPG: ' + d.AverageCityMPG + '</p><p>Cylinders: ' + d.EngineCylinders
-                        + '</p><p>Fuel: ' + d.Fuel + '</p></div>')
-                    .style("left", (d3.event.pageX + 10) + "px")
-                    .style("top", (d3.event.pageY - 15) + "px");
-            }
-        })
-        .on('mouseout', function (d, i) {
-            if (isLoadable(d, screen, num_cylinders)) {
-            d3.select(this).transition()
-                .duration('200')
-                .attr("r", 5);
-            div.transition()
-                .duration('200')
-                .style("opacity", 0);
-        }
-
-        });
+        .attr("fill", "#FFFFFF");
 
     // Add the axis
     if (width < 500) {
@@ -145,6 +126,16 @@ async function loadAggregate(num_cylinders, screen) {
             return d
         }));
 
+    const annotations = getApplicableAnnotation(screen);
+
+            const makeAnnotations = d3.annotation()
+              .type(d3.annotationLabel)
+              .annotations(annotations)
+
+            svg.append("g")
+              .attr("class", "annotation-group")
+              .call(makeAnnotations)
+
 }
 
 function isLoadable(d, screen, cylinders, make) {
@@ -154,6 +145,66 @@ function isLoadable(d, screen, cylinders, make) {
     let validMake = true;
 
     return validScreen && validCylinders && validMake;
+}
+
+function getApplicableAnnotation(screen) {
+    const gasoline_anno = [
+    {
+      type: d3.annotationCalloutRect,
+      note: {
+        label: "Gasoline powered vehicles perform on the low end of both highway and city mpg",
+        wrap: 190
+      },
+      //settings for the subject, in this case the circle radius
+      subject: {
+        width: 120,
+        height: 120
+      },
+      x: -10,
+      y: 270,
+      dy: -50,
+      dx: 75
+    }].map(function(d){ d.color = "#E8336D"; return d});
+
+    const diesel_anno = [
+    {
+      type: d3.annotationCalloutRect,
+      note: {
+        label: "Diesel powered vehicles perform on the low end of both highway and city mpg, with slightly higher mpg than Gasoline",
+        wrap: 190
+      },
+      //settings for the subject, in this case the circle radius
+      subject: {
+          width: 80,
+          height: 80
+        },
+      x: 30,
+      y: 290,
+      dy: -50,
+      dx: 75
+    }].map(function(d){ d.color = "#E8336D"; return d});
+
+    const electric_anno = [
+    {
+      type: d3.annotationCalloutRect,
+      note: {
+        label: "Electric powered vehicles greatly outperform gasoline and diesel vehicles on both city and highway mpg",
+        wrap: 190
+      },
+      //settings for the subject, in this case the circle radius
+      subject: {
+              width: 180,
+              height: 200
+            },
+      x: 200,
+      y: -10,
+      dy: 150,
+      dx: -10
+    }].map(function(d){ d.color = "#E8336D"; return d});
+
+    let anno_map = { 'Gasoline' : gasoline_anno, 'Diesel' : diesel_anno, 'Electricity' : electric_anno };
+
+    return anno_map[screen];
 }
 
 loadAggregate('All', 'Gasoline');
