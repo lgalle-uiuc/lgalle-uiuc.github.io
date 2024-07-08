@@ -1,5 +1,6 @@
 //https://medium.com/@kj_schmidt/making-a-simple-scatter-plot-with-d3js-58cc894d7c97
 //https://medium.com/@kj_schmidt/hover-effects-for-your-scatter-plot-447df80ea116
+///https://d3-annotation.susielu.com/#examples
 
 var margin = {
     top: 20,
