@@ -51,8 +51,14 @@ async function loadAggregate(num_cylinders, screen) {
 
     // so top elements are displayed
     data = data.sort((a, b) => {
-        if (b.Fuel == screen) {
+        if (a.Fuel == screen && b.Fuel == screen) {
+            if (num_cylinders == b.EngineCylinders) {
+                return -1;
+            }
+        } else if (b.Fuel == screen) {
             return -1;
+        } else {
+            return 0;
         }
     })
 

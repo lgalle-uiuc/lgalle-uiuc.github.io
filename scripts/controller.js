@@ -40,6 +40,7 @@ function onPressNext() {
     d3.select("#previous").attr("disabled", null);
     d3.select("#dynamic_title").html("2017 Cars With " + screens[screen_index] + " Fuel");
     d3.select("#explanations").html(e_map[screens[screen_index]]);
+    getCylinderOptions(screens[screen_index]);
 }
 
 function onPressPrevious() {
@@ -53,6 +54,7 @@ function onPressPrevious() {
     d3.select("#next").attr("disabled", null);
     d3.select("#dynamic_title").html("2017 Cars With " + screens[screen_index] + " Fuel");
     d3.select("#explanations").html(e_map[screens[screen_index]]);
+    getCylinderOptions(screens[screen_index]);
 }
 
 function isNextDisabled() {
@@ -62,6 +64,31 @@ function isNextDisabled() {
 function isPreviousDisabled() {
     return screen_index == 0;
 }
+
+function getCylinderOptions(page) {
+
+    options = [];
+
+    if (page == 'Gasoline') {
+        options = [{val: 'All'}, {val: '4'}, {val: '8'}, {val: '12'}];
+    } else if (page == 'Diesel') {
+        options = [{val: 'All'}, {val: '4'}, {val: '6'}];
+    } else {
+        options = [{val: 'All'}];
+    }
+
+    d3.select("#filter_cylinders").html("");
+    d3.select("#filter_cylinders")
+        .selectAll("option")
+        .data(options)
+        .enter()
+        .append("option")
+        .property("value", function(d) { return d.val; })
+        .html(function(d) { return d.val; });
+
+}
+
+getCylinderOptions('Gasoline');
 
 
 
