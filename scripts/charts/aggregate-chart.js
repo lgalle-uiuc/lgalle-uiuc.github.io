@@ -133,15 +133,22 @@ async function loadAggregate(num_cylinders, screen) {
             return d
         }));
 
+    svg.append("text")
+        .attr("class", "x label")
+        .attr("text-anchor", "end")
+        .attr("x", width)
+        .attr("y", height + 5)
+        .text("MPG highway");
+
     const annotations = getApplicableAnnotation(screen);
 
-            const makeAnnotations = d3.annotation()
-              .type(d3.annotationLabel)
-              .annotations(annotations)
+    const makeAnnotations = d3.annotation()
+      .type(d3.annotationLabel)
+      .annotations(annotations)
 
-            svg.append("g")
-              .attr("class", "annotation-group")
-              .call(makeAnnotations)
+    svg.append("g")
+      .attr("class", "annotation-group")
+      .call(makeAnnotations)
 
 }
 
@@ -173,11 +180,101 @@ function getApplicableAnnotation(screen) {
       dx: 75
     }].map(function(d){ d.color = "#E8336D"; return d});
 
+    const gasoline_anno_four = [
+    {
+      type: d3.annotationCalloutRect,
+      note: {
+        label: "4 cylinder vehicles perform the best for both highway and city mpg for Gasoline",
+        wrap: 190
+      },
+      //settings for the subject, in this case the circle radius
+      subject: {
+        width: 120,
+        height: 120
+      },
+      x: -10,
+      y: 270,
+      dy: -50,
+      dx: 75
+    }].map(function(d){ d.color = "#E8336D"; return d});
+
+    const gasoline_anno_eight = [
+    {
+      type: d3.annotationCalloutRect,
+      note: {
+        label: "8 cylinder vehicles perform poorer than 4 cylinder Vehicles, but better than 12 for Gasoline",
+        wrap: 190
+      },
+      //settings for the subject, in this case the circle radius
+      subject: {
+        width: 120,
+        height: 120
+      },
+      x: -10,
+      y: 270,
+      dy: -50,
+      dx: 75
+    }].map(function(d){ d.color = "#E8336D"; return d});
+
+    const gasoline_anno_twelve = [
+    {
+      type: d3.annotationCalloutRect,
+      note: {
+        label: "12 cylinder vehicles perform the worst for Gasoline vehicles",
+        wrap: 190
+      },
+      //settings for the subject, in this case the circle radius
+      subject: {
+        width: 120,
+        height: 120
+      },
+      x: -10,
+      y: 270,
+      dy: -50,
+      dx: 75
+    }].map(function(d){ d.color = "#E8336D"; return d});
+
     const diesel_anno = [
     {
       type: d3.annotationCalloutRect,
       note: {
         label: "Diesel powered vehicles perform on the low end of both highway and city mpg, with slightly higher mpg than Gasoline",
+        wrap: 190
+      },
+      //settings for the subject, in this case the circle radius
+      subject: {
+          width: 80,
+          height: 80
+        },
+      x: 30,
+      y: 290,
+      dy: -50,
+      dx: 75
+    }].map(function(d){ d.color = "#E8336D"; return d});
+
+    const diesel_anno_four = [
+    {
+      type: d3.annotationCalloutRect,
+      note: {
+        label: "4 cylinder vehicles perform the best for Diesel vehicles",
+        wrap: 190
+      },
+      //settings for the subject, in this case the circle radius
+      subject: {
+          width: 80,
+          height: 80
+        },
+      x: 30,
+      y: 290,
+      dy: -50,
+      dx: 75
+    }].map(function(d){ d.color = "#E8336D"; return d});
+
+    const diesel_anno_six = [
+    {
+      type: d3.annotationCalloutRect,
+      note: {
+        label: "6 cylinder vehicles perform the worst for Diesel vehicles",
         wrap: 190
       },
       //settings for the subject, in this case the circle radius
