@@ -1,24 +1,19 @@
 var screen_index = 0;
 var screens = ['Gasoline', 'Diesel' , 'Electricity'];
 
-const gasoline_explanation = 'Fuel efficiency in gasoline vehicles is typically lower compared to diesel and '
-+ 'electric vehicles. Gasoline engines operate by igniting a mixture of fuel and air, which generates power through '
-+ 'a series of controlled explosions. This process tends to be less efficient because a significant amount of energy '
-+ 'is lost as heat. On average, gasoline vehicles achieve about 25-30 miles per gallon (MPG) for standard cars, though '
-+ 'this can vary widely based on the make and model.';
+// https://www.trustauto.com/blog/diesel-vs-gasoline
+const gasoline_explanation = 'The fuel efficiency in gasoline vehicles tends to be lower when compared to diesel and'
++ ' electric vehicles. Gasoline is mixed with air and then compressed by a piston, causing a series of small explosions'
++ ' which powers the vehicle. Gasoline has a lower compression ratio than Diesel, making it less efficient. Most Gasoline'
++ ' powered vehicles average between 20 and 30 miles per gallon, but this can very greatly.';
 
-const diesel_explanation = 'Diesel vehicles, on the other hand, are generally more fuel-efficient than their gasoline '
-+ 'counterparts. Diesel engines use compression ignition, which results in a more efficient combustion process. This '
-+ 'allows diesel vehicles to extract more energy from the same amount of fuel. Consequently, diesel cars often achieve '
-+ 'higher fuel efficiency, averaging around 30-40 MPG or more. Additionally, diesel fuel contains more energy per gallon '
-+ 'than gasoline, further contributing to better mileage.'
+const diesel_explanation = 'Diesel vehicles, tend to be more efficient than gasoline. Diesel also uses combustion to '
++ 'power the vehicle, but has a hgh compression ratio which makes it more efficient than Gasoline and produces more energy. '
++ 'Because of this, Diesel vehicles are show here to at times have over 40 mpg highway.';
 
-const electric_explanation = 'Electric vehicles (EVs) represent a different paradigm in terms of fuel efficiency. '
-+ 'Instead of burning fuel, EVs convert electrical energy stored in batteries into mechanical energy using electric motors. '
-+ 'This process is highly efficient, with electric vehicles often achieving the equivalent of over 100 MPG in terms of '
-+ 'energy use. Moreover, electric motors provide instant torque and have fewer moving parts, which reduces energy losses '
-+ 'and increases overall efficiency. The primary limiting factor for EVs is the energy density of batteries, but '
-+ 'advancements in battery technology continue to improve their range and efficiency.'
+const electric_explanation = 'Electric vehicles are by far the most efficient in terms of fuel efficiency. Instead of '
++ 'burning fuel or using combustion, electric vehicles are powered by batteries. Batteries are more energy efficient '
++ 'than both Gasoline and Diesel vehicles, with many achieving 100 MPH in terms of overall energy use.';
 
 let e_map = { 'Gasoline' : gasoline_explanation, 'Diesel' : diesel_explanation, 'Electricity' : electric_explanation };
 
