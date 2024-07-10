@@ -149,7 +149,7 @@ async function loadAggregate(num_cylinders, screen) {
         .attr("font-size", "11px")
         .text("mpg city");
 
-    const annotations = getApplicableAnnotation(screen);
+    const annotations = getApplicableAnnotation(screen, num_cylinders);
 
     const makeAnnotations = d3.annotation()
       .type(d3.annotationLabel)
@@ -170,7 +170,7 @@ function isLoadable(d, screen, cylinders, make) {
     return validScreen && validCylinders && validMake;
 }
 
-function getApplicableAnnotation(screen) {
+function getApplicableAnnotation(screen, cylinders) {
     const gasoline_anno = [
     {
       type: d3.annotationCalloutRect,
@@ -198,11 +198,11 @@ function getApplicableAnnotation(screen) {
       },
       //settings for the subject, in this case the circle radius
       subject: {
-        width: 120,
-        height: 120
+        width: 90,
+        height: 90
       },
-      x: -10,
-      y: 270,
+      x: 12,
+      y: 285,
       dy: -50,
       dx: 75
     }].map(function(d){ d.color = "#E8336D"; return d});
@@ -216,11 +216,11 @@ function getApplicableAnnotation(screen) {
       },
       //settings for the subject, in this case the circle radius
       subject: {
-        width: 120,
-        height: 120
+        width: 60,
+        height: 60
       },
-      x: -10,
-      y: 270,
+      x: -8,
+      y: 325,
       dy: -50,
       dx: 75
     }].map(function(d){ d.color = "#E8336D"; return d});
@@ -234,13 +234,13 @@ function getApplicableAnnotation(screen) {
       },
       //settings for the subject, in this case the circle radius
       subject: {
-        width: 120,
-        height: 120
-      },
-      x: -10,
-      y: 270,
-      dy: -50,
-      dx: 75
+          width: 30,
+          height: 30
+        },
+        x: -8,
+        y: 355,
+        dy: -50,
+        dx: 75
     }].map(function(d){ d.color = "#E8336D"; return d});
 
     const diesel_anno = [
@@ -288,11 +288,11 @@ function getApplicableAnnotation(screen) {
       },
       //settings for the subject, in this case the circle radius
       subject: {
-          width: 80,
-          height: 80
+          width: 25,
+          height: 25
         },
       x: 30,
-      y: 290,
+      y: 328,
       dy: -50,
       dx: 75
     }].map(function(d){ d.color = "#E8336D"; return d});
@@ -315,9 +315,24 @@ function getApplicableAnnotation(screen) {
       dx: -10
     }].map(function(d){ d.color = "#E8336D"; return d});
 
-    let anno_map = { 'Gasoline' : gasoline_anno, 'Diesel' : diesel_anno, 'Electricity' : electric_anno };
+    let anno_map = {
+        'Gasoline' : {
+            'All': gasoline_anno,
+            '4' : gasoline_anno_four,
+            '8' : gasoline_anno_eight,
+            '12' : gasoline_anno_twelve
+        },
+        'Diesel' : {
+            'All' : diesel_anno,
+            '4' : diesel_anno_four,
+            '6' : diesel_anno_six
+        },
+        'Electricity' : {
+            'All' : electric_anno
+        }
+    };
 
-    return anno_map[screen];
+    return anno_map[screen][cylinders];
 }
 
 loadAggregate('All', 'Gasoline');
