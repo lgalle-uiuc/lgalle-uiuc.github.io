@@ -89,8 +89,3 @@ function getCylinderOptions(page) {
 }
 
 getCylinderOptions('Gasoline');
-
-
-
-
-

@@ -1,7 +1,3 @@
-//https://medium.com/@kj_schmidt/making-a-simple-scatter-plot-with-d3js-58cc894d7c97
-//https://medium.com/@kj_schmidt/hover-effects-for-your-scatter-plot-447df80ea116
-///https://d3-annotation.susielu.com/#examples
-
 var margin = {
     top: 20,
     right: 40,
@@ -14,42 +10,19 @@ async function loadAggregate(num_cylinders, screen) {
 
     let raw_data = await d3.csv("../resources/cars2017.csv");
 
-    //making graph responsive
-    default_width = 500 - margin.left - margin.right;
-    default_height = 500 - margin.top - margin.bottom;
-    default_ratio = default_width / default_height;
-
-    // Determine current size, which determines vars
-    function set_size() {
-        current_width = window.innerWidth;
-        current_height = window.innerHeight;
-        current_ratio = current_width / current_height;
-        // desktop
-        if (current_ratio > default_ratio) {
-            h = default_height;
-            w = default_width;
-            // mobile
-        } else {
-            margin.left = 40
-            w = current_width - 40;
-            h = w / default_ratio;
-        }
-        // Set new width and height based on graph dimensions
-        width = w - 50 - margin.right;
-        height = h - margin.top - margin.bottom;
-    };
-    set_size();
+    // https://medium.com/@kj_schmidt/making-a-simple-scatter-plot-with-d3js-58cc894d7c97
+    // simple scatter plot influenced by above tutorial
+    width = 500 - margin.left - margin.right - 50 - margin.right;
+    height = 500 - margin.top - margin.bottom - margin.top - margin.bottom;
 
     let data = [];
 
-    // format the data
     raw_data.forEach(function (d) {
         d.AverageHighwayMPG = +d.AverageHighwayMPG;
         d.AverageCityMPG = +d.AverageCityMPG;
         data.push(d);
     });
 
-    // so top elements are displayed
     data = data.sort((a, b) => {
         if (a.Fuel == screen && b.Fuel == screen) {
             if (num_cylinders == b.EngineCylinders) {
@@ -62,11 +35,9 @@ async function loadAggregate(num_cylinders, screen) {
         }
     })
 
-    // set the ranges
     var x = d3.scaleLinear().range([0, width]);
     var y = d3.scaleLinear().range([height, 0]);
 
-    // Scale the range of the data
     x.domain(d3.extent(data, function (d) {
         return d.AverageHighwayMPG;
     }));
@@ -74,15 +45,12 @@ async function loadAggregate(num_cylinders, screen) {
         return d.AverageCityMPG;
     })]);
 
-    // append the svg object to the body of the page
     var svg = d3.select("#aggregate_chart").append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
-
-    // Add the data points
 
     var div = d3.select("body").append("div")
          .attr('id', 'car_mouse_over')
@@ -117,7 +85,6 @@ async function loadAggregate(num_cylinders, screen) {
         .attr("stroke-width", 1.5)
         .attr("fill", "#FFFFFF");
 
-    // Add the axis
     if (width < 500) {
         svg.append("g")
             .attr("transform", "translate(0," + height + ")")
