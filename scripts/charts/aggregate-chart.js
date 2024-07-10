@@ -133,12 +133,21 @@ async function loadAggregate(num_cylinders, screen) {
             return d
         }));
 
+    // https://stackoverflow.com/questions/11189284/d3-axis-labeling
     svg.append("text")
-        .attr("class", "x label")
         .attr("text-anchor", "end")
-        .attr("x", width)
-        .attr("y", height + 5)
-        .text("MPG highway");
+        .attr("x", width / 2 + 35)
+        .attr("y", height + 27)
+        .attr("font-size", "11px")
+        .text("mpg highway");
+
+    svg.append("text")
+        .attr("text-anchor", "end")
+        .attr("x", -27)
+        .attr("writing-mode", "vertical-lr")
+        .attr("y", height / 2)
+        .attr("font-size", "11px")
+        .text("mpg city");
 
     const annotations = getApplicableAnnotation(screen);
 

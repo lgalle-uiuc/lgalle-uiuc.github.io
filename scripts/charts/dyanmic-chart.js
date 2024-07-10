@@ -142,6 +142,22 @@ async function loadDynamic(num_cylinders, screen) {
             return d
         }));
 
+    svg.append("text")
+        .attr("text-anchor", "end")
+        .attr("x", width / 2 + 35)
+        .attr("y", height + 27)
+        .attr("font-size", "11px")
+        .text("mpg highway");
+
+    svg.append("text")
+        .attr("text-anchor", "end")
+        .attr("x", -27)
+        .attr("writing-mode", "vertical-lr")
+        .attr("y", height / 2)
+        .attr("font-size", "11px")
+        .text("mpg city");
+
+
 }
 
 function onChangeCylinder() {
