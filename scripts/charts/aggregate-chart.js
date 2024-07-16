@@ -137,6 +137,7 @@ function isLoadable(d, screen, cylinders, make) {
     return validScreen && validCylinders && validMake;
 }
 
+//https://d3-annotation.susielu.com/
 function getApplicableAnnotation(screen, cylinders) {
     const gasoline_anno = [
     {
@@ -145,7 +146,6 @@ function getApplicableAnnotation(screen, cylinders) {
         label: "Gasoline powered vehicles perform on the low end of both highway and city mpg",
         wrap: 190
       },
-      //settings for the subject, in this case the circle radius
       subject: {
         width: 120,
         height: 120
@@ -163,7 +163,6 @@ function getApplicableAnnotation(screen, cylinders) {
         label: "4 cylinder vehicles perform the best for both highway and city mpg for Gasoline",
         wrap: 190
       },
-      //settings for the subject, in this case the circle radius
       subject: {
         width: 90,
         height: 90
@@ -181,7 +180,6 @@ function getApplicableAnnotation(screen, cylinders) {
         label: "8 cylinder vehicles perform poorer than 4 cylinder Vehicles, but better than 12 for Gasoline",
         wrap: 190
       },
-      //settings for the subject, in this case the circle radius
       subject: {
         width: 60,
         height: 60
@@ -199,7 +197,6 @@ function getApplicableAnnotation(screen, cylinders) {
         label: "12 cylinder vehicles perform the worst for Gasoline vehicles",
         wrap: 190
       },
-      //settings for the subject, in this case the circle radius
       subject: {
           width: 30,
           height: 30
@@ -217,7 +214,6 @@ function getApplicableAnnotation(screen, cylinders) {
         label: "Diesel powered vehicles perform on the low end of both highway and city mpg, with slightly higher mpg than Gasoline",
         wrap: 190
       },
-      //settings for the subject, in this case the circle radius
       subject: {
           width: 80,
           height: 80
@@ -235,7 +231,6 @@ function getApplicableAnnotation(screen, cylinders) {
         label: "4 cylinder vehicles perform the best for Diesel vehicles",
         wrap: 190
       },
-      //settings for the subject, in this case the circle radius
       subject: {
           width: 80,
           height: 80
@@ -253,7 +248,6 @@ function getApplicableAnnotation(screen, cylinders) {
         label: "6 cylinder vehicles perform the worst for Diesel vehicles",
         wrap: 190
       },
-      //settings for the subject, in this case the circle radius
       subject: {
           width: 25,
           height: 25
@@ -271,7 +265,6 @@ function getApplicableAnnotation(screen, cylinders) {
         label: "Electric powered vehicles greatly outperform gasoline and diesel vehicles on both city and highway mpg",
         wrap: 190
       },
-      //settings for the subject, in this case the circle radius
       subject: {
               width: 180,
               height: 200
