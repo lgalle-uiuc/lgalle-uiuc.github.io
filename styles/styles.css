@@ -1,3 +1,7 @@
+/**
+https://medium.com/@kj_schmidt/hover-effects-for-your-scatter-plot-447df80ea116
+mouse over events influences by tutorial above
+ **/
 div.tooltip {
     position: absolute;
     text-align: center;
